@@ -1,4 +1,4 @@
-const handlers = require('../handlers/');
+const handlers = require('../handlers/handlers');
 const router = require('express').Router();
 
 router.get('/', handlers.user.get);

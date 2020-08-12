@@ -15,15 +15,13 @@ const bookSchema = new Schema({
         require: true
     },
 
-    authors: [{
-        type: ObjectId,
-        ref: "Author"
-    }],
+    author: {
+        type: String,
+    },
 
-    ganres: [{
-        type: ObjectId,
-        ref: "Ganre"
-    }],
-})
+    ganre: {
+        type: String,
+    }
+}, { timestamps: { createdAt: 'created_at' } })
 
 module.exports = new Model('Book', bookSchema)

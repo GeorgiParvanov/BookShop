@@ -18,7 +18,7 @@ const userSchema = new Schema({
         require: true
     },
 
-    books: [{
+    cart: [{
         type: ObjectId,
         ref: "Book"
     }]
