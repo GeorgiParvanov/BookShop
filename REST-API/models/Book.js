@@ -15,12 +15,19 @@ const bookSchema = new Schema({
         require: true
     },
 
+    description: {
+        type: String,
+        required: true
+    },
+
     author: {
         type: String,
+        required: true
     },
 
     ganre: {
         type: String,
+        required: true
     }
 }, { timestamps: { createdAt: 'created_at' } })
 
