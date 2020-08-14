@@ -28,6 +28,11 @@ const bookSchema = new Schema({
     ganre: {
         type: String,
         required: true
+    },
+
+    imageURL: {
+        type: String,
+        required: true
     }
 }, { timestamps: { createdAt: 'created_at' } })
 

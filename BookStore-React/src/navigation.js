@@ -1,13 +1,14 @@
 import React, { useContext } from 'react'
 import {
-  BrowserRouter,
+  Router,
   Switch,
   Route,
   Redirect
 } from 'react-router-dom'
+import history from './utils/history';
 
 import Books from './pages/books'
-// import Book from './pages/book'
+import Book from './pages/book'
 import Cart from './pages/cart'
 
 // import Publications from './pages/publications'
@@ -15,6 +16,7 @@ import Cart from './pages/cart'
 // import ProfilePage from './pages/profile'
 import RegisterPage from './pages/register'
 import LoginPage from './pages/login'
+import LogoutPage from './pages/logout'
 import ErrorPage from './pages/error'
 import UserContext from './Context'
 
@@ -23,7 +25,7 @@ const Navigation = () => {
   const loggedIn = context.user.loggedIn
 
   return (
-    <BrowserRouter>
+    <Router history={history}>
       <Switch>
         <Route path="/" exact component={Books} />
         <Route path="/cart"> 
@@ -35,12 +37,15 @@ const Navigation = () => {
         <Route path="/login">
           {loggedIn ? (<Redirect to="/" />) : (<LoginPage />)}
         </Route>
-        {/* <Route path="/profile/:userid">
-          {loggedIn ? (<ProfilePage />): (<Redirect to="/login" />)}
-        </Route> */}
+        <Route path="/logout">
+          {loggedIn ? (<LogoutPage />): (<Redirect to="/login" />)}
+        </Route>
+        <Route path="/book/:bookid">
+          {loggedIn ? (<Book />): (<Redirect to="/login" />)}
+        </Route>
         <Route component={ErrorPage} />
       </Switch>
-    </BrowserRouter>
+    </Router>
   )
 }
 

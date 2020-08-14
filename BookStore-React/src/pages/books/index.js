@@ -1,11 +1,14 @@
 import React from 'react'
 import PageLayout from '../../components/page-layout';
+import Title from '../../components/title'
+import Books from '../../components/books';
 
 
 const ErrorPage = () => {
   return (
     <PageLayout>
-      <div>Books Page</div>
+      <Title title="Books" />
+      <Books/>
     </PageLayout>
   )
 }

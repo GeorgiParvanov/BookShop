@@ -9,6 +9,14 @@ const getNavigation = (user) => {
       title: "Cart",
       link: "/cart"
     },
+    {
+      title: "Logout",
+      link: "/logout"
+    },
+    // {
+    //   title: "Book",
+    //   link: `/book/:${bookId}`
+    // }
   ]
 
   const guestLinks = [

@@ -12,9 +12,14 @@ module.exports = {
                 .catch(next)
         },
         getBook: (req, res, next) => {
-            const { bookId } = req.body
-            models.Book.findOne({ bookId })
+            const bookId = req.params.id
+            // const newbookId = bookId.substring(1, bookId.length)
+            // console.log("newbookID: ", newbookId);
+            // var mongoose = require('mongoose');
+            // console.log(mongoose.Types.ObjectId.isValid(bookId));
+            models.Book.findById(bookId)
                 .then(book => {
+                    // console.log('bookHandler book: ', book);
                     res.send(book)
                 })
                 .catch(next)
