@@ -4,7 +4,7 @@ import Title from '../../components/title'
 import Books from '../../components/books';
 
 
-const ErrorPage = () => {
+const BooksPage = () => {
   return (
     <PageLayout>
       <Title title="Books" />
@@ -13,4 +13,4 @@ const ErrorPage = () => {
   )
 }
 
-export default ErrorPage
+export default BooksPage

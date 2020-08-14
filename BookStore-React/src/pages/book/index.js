@@ -1,21 +1,29 @@
-import React, { useState, useCallback, useEffect } from 'react'
+import React, { useState, useCallback, useEffect, useContext } from 'react'
 import { useParams } from 'react-router-dom'
 import PageLayout from '../../components/page-layout';
 import styles from './index.module.scss'
 import getBook from '../../utils/book'
+import userContext from '../../Context';
 
 
 const BookPage = () => {
   const [book, setBook] = useState({})
+  const context = useContext(userContext)
   const params = useParams()
   const id = params.bookid
 
   const getBookFunc = useCallback(async () => {
     const book = await getBook(id)
-    console.log(id);
-    console.log("book: ", book);
     setBook(book)
   }, [id])
+
+  const addBookToCart = async () => {
+    const promise = await fetch(`http://localhost:9999/api/books/addToCart/${params.bookid}/${context.user.id}`)
+    console.log("updatedUser: ", promise);
+    const updatedUser = await promise.json()
+    console.log("updatedUser: ", updatedUser);
+    return updatedUser
+  }
 
   const renderBook = () => {
     return (
@@ -46,7 +54,7 @@ const BookPage = () => {
                 <h1 className={styles['heading']}>
                   Price: {book.price}$
         </h1>
-                <button className={styles.button}>
+                <button onClick={addBookToCart} className={styles.button}>
                   Add To Cart
           </button>
               </footer>
