@@ -3,6 +3,7 @@ const router = require('express').Router()
 
 router.get('/:userId', handlers.cart.get.getCartBooks)
 
-router.post('/removeFromCart/:id', handlers.cart.put.removeFromCart)
+router.get('/removeFromCart/:bookId/:userId', handlers.cart.put.removeFromCart)
+router.get('/removeAllFromCart/:userId', handlers.cart.put.removeAllFromCart)
 
 module.exports = router

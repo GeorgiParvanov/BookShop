@@ -1,5 +1,5 @@
 .header-link {
-  color: white;
+  color: hsl(219, 100%, 50%);
   text-decoration: none;
 }
 
@@ -16,12 +16,12 @@
 .header-list-item:not(:first-child) {
   padding: 10px;
   margin-top: 7px;
-  border-top: 2px solid #ffa000;
+  border-top: 2px solid gray;
 }
 
 .header-list-item:hover {
   border-top: none;
-  border-bottom: 2px solid #ffa000;
+  border-bottom: 2px solid gray;
   font-weight: bold;
 }
 
@@ -29,7 +29,7 @@
 
 /* footer */
 .footer-link {
-  color: #234465;
+  color: hsl(219, 100%, 50%);
   text-decoration: none;
 }
 
@@ -39,8 +39,10 @@
 }
 
 
-.footer-list-item:not(:last-child) {
+.footer-list-item {
   padding: 2%;
+  padding-bottom: 0%;
+
   margin-top: 1.5%;
   border-bottom: 2px solid #234465;
 }
@@ -49,33 +51,4 @@
   border-bottom: none;
   border-top: 2px solid #234465;
   font-weight: bold;
-}
-
-
-.aside-list-item {
-  display: block;
-  width: 98%;
-  border-left: 2px solid #234465;
-  border-right: 2px solid #234465;
-  margin-bottom: 11%;
-  height: 5vh;
-  text-align: center;
-}
-
-.aside-link {
-  color: #234465;
-  text-align: center;
-  text-decoration: none;
-  padding-top: 5px;
-  height: 60%;
-  display: block;
-}
-
-.aside-list-item:hover {
-  border-left: none;
-  border-right: none;
-  font-weight: bold;
-  border-top: 2px solid #234465;
-  border-bottom: 2px solid #234465;
-  color: #ffa000;
 }

@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react'
 import UserContext from './Context'
 import getCookie from './utils/cookie'
+import Spinner from './components/loading-spinner';
 
 const App = (props) => {
   const [user, setUser] = useState(null)
@@ -36,7 +37,6 @@ const App = (props) => {
         'Authorization': token
       }
     }).then(promise => {
-      console.log('promise');
       return promise.json()
     }).then(response => {
       if(response.status) {
@@ -53,7 +53,7 @@ const App = (props) => {
 
   if (loading) {
     return (
-      <div>Loading....</div>
+      <Spinner />
     )
   }
 

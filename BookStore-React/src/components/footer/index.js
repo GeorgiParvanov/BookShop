@@ -16,7 +16,6 @@ class Footer extends Component {
     const links = getNavigation(user)
     return (
       <footer className={styles.footer}>
-        <div>
           {
             links.map(navElement => {
               return (
@@ -29,9 +28,7 @@ class Footer extends Component {
               )
             })
           }
-        </div>
-        <p className={styles.university}>Software University 2019</p>
-
+          <p className={styles.university}>Software University 2019</p>
       </footer>
     )
   }

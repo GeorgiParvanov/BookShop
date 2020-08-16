@@ -7,9 +7,8 @@ module.exports = {
         getCartBooks: (req, res, next) => {
             const { userId } = req.params
 
-            models.User.findOne({ _id: userId }).populate('Book')
+            models.User.findOne({ _id: userId }).populate('cart')
                 .then(user => {
-                    console.log("cart: ", user.cart);
                     res.send(user.cart)
                 })
                 .catch(next)
@@ -21,18 +20,24 @@ module.exports = {
 
             models.User.updateOne({ _id: userId }, { $push: { cart: bookId } })
                 .then(updatedUser => {
-                    console.log('updatedUser', updatedUser)
                     res.send(updatedUser)
                 })
                 .catch(next)
         },
         removeFromCart: (req, res, next) => {
-            const { _id } = req.user
-            const bookId = req.params.id
+            const { bookId, userId } = req.params
 
-            models.User.updateOne({ _id }, { $pull: { cart: bookId } })
+            models.User.updateOne({ _id: userId }, { $pull: { cart: bookId } })
                 .then(updatedUser => {
-                    console.log('updatedUser', updatedUser)
+                    res.send(updatedUser)
+                })
+                .catch(next)
+        },
+        removeAllFromCart: (req, res, next) => {
+            const { userId } = req.params
+
+            models.User.updateOne({ _id: userId }, { $set: { cart: [] } })
+                .then(updatedUser => {
                     res.send(updatedUser)
                 })
                 .catch(next)

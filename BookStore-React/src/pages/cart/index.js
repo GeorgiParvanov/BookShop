@@ -3,36 +3,49 @@ import PageLayout from '../../components/page-layout';
 import Title from '../../components/title'
 import getCartItems from '../../utils/cartItems'
 import userContext from '../../Context';
-import './index.module.css'
+import Spinner from '../../components/loading-spinner';
+import styles from './index.module.scss'
 
 const CartPage = () => {
   const [cartItems, setCartItems] = useState([])
+  const [loading, setLoading] = useState(true)
   const context = useContext(userContext)
 
   const getCartItemsFunc = useCallback(async () => {
     const cartItems = await getCartItems(context.user.id)
     setCartItems(cartItems)
-  }, [])
+    setLoading(!loading)
+  }, [context.user.id])
 
-  const onDelete = async (id) => {
-    const promise = await fetch(`http://localhost:9999/api/cart/removeFromCart/${id}`)
+  const onDeleteBook = async (bookid) => {
+    const promise = await fetch(`http://localhost:9999/api/cart/removeFromCart/${bookid}/${context.user.id}`)
     const updatedUser = await promise.json()
     getCartItemsFunc()
     return updatedUser
   }
 
+  const onEmptyCart = async () => {
+    const promise = await fetch(`http://localhost:9999/api/cart/removeAllFromCart/${context.user.id}`)
+    const updatedUser = await promise.json()
+    setCartItems([])
+    return updatedUser
+  }
+
   const renderRow = (cartItem, idx) => {
-    console.log("cartItem: ", cartItem);
-    const { id, name, price } = cartItem
+    const { _id, name, price } = cartItem
+
+    if (loading) {
+      return (
+        <Spinner />
+      )
+    }
     return (
-      <tr key={id}>
+      <tr className={'null'} key={_id + idx}>
         <td>{idx + 1}</td>
         <td>{name}</td>
         <td>${price}</td>
         <td>
-          <button onClick={() => onDelete(id)} className="btn btn-outline-danger btn-sm float-right">
-            <i className="fa fa-trash-o" />
-          </button>
+          <button className={styles.button} onClick={() => onDeleteBook(_id)}>Delete From Cart</button>
         </td>
       </tr>
     )
@@ -42,13 +55,16 @@ const CartPage = () => {
     getCartItemsFunc()
   }, [getCartItemsFunc])
 
+
+
   return (
     <PageLayout>
       <Title title="Cart" />
-      <div className="shopping-cart-table">
+      <div className={styles["shopping-cart-table"]}>
         <h2>Your Order</h2>
-        <table className="table">
-          <thead>
+        <br></br>
+        <table className={null}>
+          <thead className={null}>
             <tr>
               <th>#</th>
               <th>Item</th>
@@ -57,13 +73,12 @@ const CartPage = () => {
             </tr>
           </thead>
 
-          <tbody>
+          <tbody className={null}>
             {cartItems.map(renderRow)}
           </tbody>
         </table>
-        {/* <div className="total">
-          Total: ${total}
-        </div> */}
+        <br />
+        <button onClick={onEmptyCart} className={styles.button}>Purchase selected books</button>
       </div>
     </PageLayout>
   )

@@ -6,7 +6,6 @@ module.exports = {
     get: {
         getBooks: (req, res, next) => {
             const length = req.query.length ? parseInt(req.query.length) : 20
-            console.log('getBooks query:', req.query)
             models.Book.find().sort('-created_at').limit(length)
                 .then((books) => res.send(books))
                 .catch(next)

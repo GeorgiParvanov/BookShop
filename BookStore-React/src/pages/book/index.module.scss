@@ -70,6 +70,16 @@
     margin-bottom: 3px;
     line-height: 1.3;
   }
+
+  > .heading-price {
+    color: green;
+    font-family: 'Arbutus Slab', serif;
+    font-size: 25px;
+    font-weight: 600;
+    margin-bottom: 3px;
+    margin-top: 290px;
+    line-height: 1.3;
+  }
   
    > .author {
       color: #40d3b4;
@@ -108,8 +118,9 @@
   font-weight: 700;
   padding: 16px 20px;
   letter-spacing: 0.5px;
-  align-text: center;
+  text-align: center;
   border-radius: 3px;
+  margin-top: 190px;
 
   &:hover {
     background-color: #efefef;

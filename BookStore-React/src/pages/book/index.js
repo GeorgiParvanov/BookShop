@@ -19,9 +19,7 @@ const BookPage = () => {
 
   const addBookToCart = async () => {
     const promise = await fetch(`http://localhost:9999/api/books/addToCart/${params.bookid}/${context.user.id}`)
-    console.log("updatedUser: ", promise);
     const updatedUser = await promise.json()
-    console.log("updatedUser: ", updatedUser);
     return updatedUser
   }
 
@@ -33,25 +31,25 @@ const BookPage = () => {
             <div className={styles['image']}>
               <div className={styles['content']}>
                 <div className={styles['book-cover']}>
-                  <img alt='' src='https://source.unsplash.com/4LiUI-Y2mI8/300x400' />
+                  <img alt='' src={book.imageURL} />
                 </div>
               </div>
             </div>
             <div className={`${styles.text}` + ' ' + `${styles['book-text']}`}>
-              <span className={styles['genre']}>
-                {book.ganre}
-              </span>
               <h1 className={styles['heading']}>
                 {book.name}
               </h1>
               <div className={styles.author}>
                 by {book.author}
               </div>
+              <span className={styles['genre']}>
+                Ganre: {book.ganre}
+              </span>
               <article className={styles.description}>
-                {book.description}
+                Description: {book.description}
               </article>
               <footer className={styles.footer}>
-                <h1 className={styles['heading']}>
+                <h1 className={styles['heading-price']}>
                   Price: {book.price}$
         </h1>
                 <button onClick={addBookToCart} className={styles.button}>
